@@ -14,16 +14,16 @@ class CharSeg():
         self.image = cv2.imread(self.dir_source + self.file_name)
         self.image_gray = cv2.cvtColor(self.image, cv2.COLOR_BGR2GRAY)
 
-    def scan_image_horizontal(self):
-        # Scan the image column by column to count how many dot in one column
+    def scan_image_horizontal(self, image):
+        # Scan the sentence column by column to count how many dot in one column
         # Save all the amount in an array "horizontal"
-        height = self.image_gray.shape[0]
-        width = self.image_gray.shape[1]
+        height = image.shape[0]
+        width = image.shape[1]
         horizontal = np.zeros(width, dtype = int)
         for x in range(width): # From left to right
             count = 0 # The amount of dots of each column
             for y in range(height): # From top to bottom
-                if (self.image_gray[y][x] < 128) :
+                if (image[y][x] < 128) :
                     count = count + 1
             horizontal[x] = count
               # print(horizontal)
@@ -54,6 +54,7 @@ class CharSeg():
                 pass
             elif y <= 1 and start_point is not None and end_point is None:
                 end_point = i
+                return end_point - start_point
             else:
                 pass
         return end_point - start_point
@@ -81,8 +82,10 @@ class CharSeg():
                 pass
         return parts
 
-    def cutImage(self, img, horizontal_ranges, vertical_ranges, output_size, dir_saved):
+    def cutImage(self, img, vertical_ranges, char_height, output_size, dir_saved):
         for y, vertical_index_pair in enumerate(vertical_ranges):
+            horizontal = self.scan_image_horizontal(img[vertical_index_pair[0] : vertical_index_pair[1], : ])
+            horizontal_ranges = self.segmentation(horizontal, 2, char_height * 0.75)
             for x, horizontal_index_pair in enumerate(horizontal_ranges):
                 cutted_char = img[vertical_index_pair[0]    : vertical_index_pair[1], 
                                   horizontal_index_pair[0] : horizontal_index_pair[1]]
@@ -91,15 +94,12 @@ class CharSeg():
                 print("row" + str(y) + "pos" + str(x) + "saved!")
 
     def run(self):
-        horizontal = self.scan_image_horizontal()
         vertical = self.scan_image_vertical()
         char_height = self.get_sentence_height(vertical)
         print('The height of these characters is about: ' + str(char_height) + ' pixel')
         vertical_segs = self.segmentation(vertical, self.threshold, char_height * self.size_flex)
-        horizontal_segs = self.segmentation(horizontal, self.threshold, char_height * self.size_flex)
         print(vertical_segs)
-        print(horizontal_segs)
-        self.cutImage(self.image_gray, horizontal_segs, vertical_segs, self.output_size, self.dir_saved)
+        self.cutImage(self.image_gray, vertical_segs, char_height, self.output_size, self.dir_saved)
 
 
 
