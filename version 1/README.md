@@ -1,0 +1,1 @@
+First, we used matlab to do image segmentation. We try to define each character by its boundry. But many Chinese characters have more than one part, this method will segment the entire character into two parts, which may cause mistakes for the following training.
