@@ -80,6 +80,7 @@ class CharSeg():
                 else:
                     start_i = 0
             elif val > threshold and start_i is not None:
+                blank_count = 0
                 pass
             elif val < threshold and start_i is not None:
                 blank_count += 1
