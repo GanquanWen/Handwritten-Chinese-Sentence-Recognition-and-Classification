@@ -3,8 +3,10 @@
 ### Branch
 The image_seg branch is for image segmentation.<br/>
 ### Folder
-The version #1 is using Matlab to do segmentation. But it could not segment the characters correctly. <br/>
-The Sentence_Segmentation is the final version of segmentation which is done by Python.
+version #1: using Matlab to do segmentation. But it could not segment the characters correctly. <br/>
+Sentence_Segmentation: the final version of segmentation which is done by Python. <br\>
+text_cnn:
+
 ### Contributor
 Ganquan Wen: wengq@bu.edu <br/>
 Jiali Ge: ivydany@bu.edu <br/>
