@@ -104,14 +104,14 @@ def generate_test(orig_path, saved_path, truth_path, sentence_lenth, samples_num
         cv2.imwrite(saved_path+str(i)+'.png', sent_img)
         truth_list.append(truth_temp_list)
        
-#      If wanted to print the truth result, uncomment the following code, remember to change the format of the result if the sentence
-#       length has been changed
+#      If wanted to print the truth result,  remember to change the format of the result if the sentence
+#       length has been changed， following code is for sentence length = 10
        
-#     output = open(truth_path + 'truth.txt','w', encoding = "utf8")
-#     for row in truth_list:
-#         rowtxt = '{},{},{},{},{},{},{},{},{},{}'.format(row[0],row[1],row[2],row[3], row[4],row[5],row[6],row[7],row[8],row[9])
-#         output.write(rowtxt)
-#         output.write('\n')
-#     output.close()
+    output = open(truth_path + 'truth.txt','w', encoding = "utf8")
+    for row in truth_list:
+        rowtxt = '{},{},{},{},{},{},{},{},{},{}'.format(row[0],row[1],row[2],row[3], row[4],row[5],row[6],row[7],row[8],row[9])
+        output.write(rowtxt)
+        output.write('\n')
+    output.close()
 
 generate_test(orig_path, saved_path, truth_path, sentence_lenth, samples_num)
