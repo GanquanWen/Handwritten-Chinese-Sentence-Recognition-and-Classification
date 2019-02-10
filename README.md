@@ -1,4 +1,4 @@
-# BU-EC500-Deep-Learing-Project
+# BU-EC500-Deep-Learing-Project(Handwritten Chinese Sentence Recognition and Classification)
 
 ### Branch
 The image_seg branch is for image segmentation.<br/>
