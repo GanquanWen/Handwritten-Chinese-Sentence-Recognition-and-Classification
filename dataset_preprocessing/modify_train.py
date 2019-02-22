@@ -22,7 +22,7 @@ for folder in os.listdir('/Users/yuchen/Desktop/Dataset/HWDB1.1/Train'):
                 height, width = gray_img.shape
                 if height > width:
                     add_1 = (height - width) // 2
-                    add_2 = height - width - add_1
+                    add_2 = height - width - add_1    #make sure height == weight
                     left = np.ones((add_1, height)) * 255
                     right = np.ones((add_2, height)) * 255
                     step_1 = np.insert(gray_img, 0, values=left, axis=1)
